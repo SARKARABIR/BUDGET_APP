@@ -5,11 +5,24 @@ def get_connection():
     return conn
 
 def init_db():
+
+
     conn = sqlite3.connect("database.db")
     cursor = conn.cursor()
 
     cursor.execute("""
-    CREATE TABLE IF NOT EXISTS budget(
+    CREATE TABLE IF NOT EXISTS transactions (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        amount REAL,
+        type TEXT,
+        category TEXT,
+        date TEXT,
+        description TEXT
+    )
+    """)
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS budget (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         monthly_limit REAL
     )
